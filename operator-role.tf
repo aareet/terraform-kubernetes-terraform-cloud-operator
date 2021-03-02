@@ -5,8 +5,6 @@ resource "kubernetes_manifest" "role_operator_terraform_sync_workspace" {
     "apiVersion" = "rbac.authorization.k8s.io/v1"
     "kind" = "Role"
     "metadata" = {
-      "annotations" = {
-      }
       "labels" = {
         "app" = "terraform"
         "app.kubernetes.io/managed-by" = "Helm"

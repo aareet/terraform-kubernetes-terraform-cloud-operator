@@ -5,8 +5,6 @@ resource "kubernetes_manifest" "serviceaccount_operator_terraform_sync_workspace
     "apiVersion" = "v1"
     "kind" = "ServiceAccount"
     "metadata" = {
-      "annotations" = {
-      }
       "labels" = {
         "app" = "terraform"
         "chart" = "terraform-helm"

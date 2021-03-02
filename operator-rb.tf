@@ -5,8 +5,6 @@ resource "kubernetes_manifest" "rolebinding_operator_terraform_sync_workspace" {
     "apiVersion" = "rbac.authorization.k8s.io/v1"
     "kind" = "RoleBinding"
     "metadata" = {
-      "annotations" = {
-      }
       "labels" = {
         "app" = "terraform"
         "chart" = "terraform-helm"
