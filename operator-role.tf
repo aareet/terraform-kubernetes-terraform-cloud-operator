@@ -7,9 +7,6 @@ resource "kubernetes_manifest" "role_operator_terraform_sync_workspace" {
     "metadata" = {
       "labels" = {
         "app" = "terraform"
-        "app.kubernetes.io/managed-by" = "Helm"
-        "chart" = "terraform-helm"
-        "heritage" = "Helm"
         "release" = "operator"
       }
       "name" = "operator-terraform-sync-workspace"

@@ -5,16 +5,8 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
     "apiVersion" = "apps/v1"
     "kind" = "Deployment"
     "metadata" = {
-      "annotations" = {
-        "deployment.kubernetes.io/revision" = "1"
-        "meta.helm.sh/release-name" = "operator"
-        "meta.helm.sh/release-namespace" = "demo"
-      }
       "labels" = {
         "app" = "terraform"
-        "app.kubernetes.io/managed-by" = "Helm"
-        "chart" = "terraform-helm"
-        "heritage" = "Helm"
         "release" = "operator"
       }
       "name" = "operator-terraform-sync-workspace"
@@ -27,7 +19,6 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
       "selector" = {
         "matchLabels" = {
           "app" = "terraform"
-          "chart" = "terraform-helm"
           "component" = "sync-workspace"
           "release" = "operator"
         }
@@ -41,10 +32,8 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
       }
       "template" = {
         "metadata" = {
-          "creationTimestamp" = null
           "labels" = {
             "app" = "terraform"
-            "chart" = "terraform-helm"
             "component" = "sync-workspace"
             "release" = "operator"
           }
@@ -132,7 +121,6 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
           "dnsPolicy" = "ClusterFirst"
           "restartPolicy" = "Always"
           "schedulerName" = "default-scheduler"
-          "securityContext" = {}
           "serviceAccount" = "operator-terraform-sync-workspace"
           "serviceAccountName" = "operator-terraform-sync-workspace"
           "terminationGracePeriodSeconds" = 30
@@ -140,7 +128,6 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
             {
               "name" = "terraformrc"
               "secret" = {
-                "defaultMode" = 420
                 "items" = [
                   {
                     "key" = "credentials"
@@ -153,7 +140,6 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
             {
               "name" = "sensitivevars"
               "secret" = {
-                "defaultMode" = 420
                 "secretName" = "workspacesecrets"
               }
             },
