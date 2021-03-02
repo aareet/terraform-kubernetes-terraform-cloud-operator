@@ -1,0 +1,165 @@
+resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
+  provider = kubernetes-alpha
+
+  manifest = {
+    "apiVersion" = "apps/v1"
+    "kind" = "Deployment"
+    "metadata" = {
+      "annotations" = {
+        "deployment.kubernetes.io/revision" = "1"
+        "meta.helm.sh/release-name" = "operator"
+        "meta.helm.sh/release-namespace" = "demo"
+      }
+      "labels" = {
+        "app" = "terraform"
+        "app.kubernetes.io/managed-by" = "Helm"
+        "chart" = "terraform-helm"
+        "heritage" = "Helm"
+        "release" = "operator"
+      }
+      "name" = "operator-terraform-sync-workspace"
+      "namespace" = "demo"
+    }
+    "spec" = {
+      "progressDeadlineSeconds" = 600
+      "replicas" = 1
+      "revisionHistoryLimit" = 10
+      "selector" = {
+        "matchLabels" = {
+          "app" = "terraform"
+          "chart" = "terraform-helm"
+          "component" = "sync-workspace"
+          "release" = "operator"
+        }
+      }
+      "strategy" = {
+        "rollingUpdate" = {
+          "maxSurge" = "25%"
+          "maxUnavailable" = "25%"
+        }
+        "type" = "RollingUpdate"
+      }
+      "template" = {
+        "metadata" = {
+          "creationTimestamp" = null
+          "labels" = {
+            "app" = "terraform"
+            "chart" = "terraform-helm"
+            "component" = "sync-workspace"
+            "release" = "operator"
+          }
+        }
+        "spec" = {
+          "containers" = [
+            {
+              "args" = [
+                "--enable-leader-election",
+                "--k8s-watch-namespace=demo",
+              ]
+              "command" = [
+                "/bin/terraform-k8s",
+              ]
+              "env" = [
+                {
+                  "name" = "POD_NAME"
+                  "valueFrom" = {
+                    "fieldRef" = {
+                      "apiVersion" = "v1"
+                      "fieldPath" = "metadata.name"
+                    }
+                  }
+                },
+                {
+                  "name" = "OPERATOR_NAME"
+                  "value" = "terraform-k8s"
+                },
+                {
+                  "name" = "TF_VERSION"
+                  "value" = "latest"
+                },
+                {
+                  "name" = "TF_CLI_CONFIG_FILE"
+                  "value" = "/etc/terraform/.terraformrc"
+                },
+                {
+                  "name" = "TF_URL"
+                },
+              ]
+              "image" = "hashicorp/terraform-k8s:1.0.0"
+              "imagePullPolicy" = "IfNotPresent"
+              "livenessProbe" = {
+                "failureThreshold" = 3
+                "httpGet" = {
+                  "path" = "/metrics"
+                  "port" = 8383
+                  "scheme" = "HTTP"
+                }
+                "initialDelaySeconds" = 30
+                "periodSeconds" = 5
+                "successThreshold" = 1
+                "timeoutSeconds" = 5
+              }
+              "name" = "terraform-sync-workspace"
+              "readinessProbe" = {
+                "failureThreshold" = 5
+                "httpGet" = {
+                  "path" = "/metrics"
+                  "port" = 8383
+                  "scheme" = "HTTP"
+                }
+                "initialDelaySeconds" = 10
+                "periodSeconds" = 5
+                "successThreshold" = 1
+                "timeoutSeconds" = 5
+              }
+              "resources" = {}
+              "terminationMessagePath" = "/dev/termination-log"
+              "terminationMessagePolicy" = "File"
+              "volumeMounts" = [
+                {
+                  "mountPath" = "/etc/terraform"
+                  "name" = "terraformrc"
+                  "readOnly" = true
+                },
+                {
+                  "mountPath" = "/tmp/secrets"
+                  "name" = "sensitivevars"
+                  "readOnly" = true
+                },
+              ]
+            },
+          ]
+          "dnsPolicy" = "ClusterFirst"
+          "restartPolicy" = "Always"
+          "schedulerName" = "default-scheduler"
+          "securityContext" = {}
+          "serviceAccount" = "operator-terraform-sync-workspace"
+          "serviceAccountName" = "operator-terraform-sync-workspace"
+          "terminationGracePeriodSeconds" = 30
+          "volumes" = [
+            {
+              "name" = "terraformrc"
+              "secret" = {
+                "defaultMode" = 420
+                "items" = [
+                  {
+                    "key" = "credentials"
+                    "path" = ".terraformrc"
+                  },
+                ]
+                "secretName" = "terraformrc"
+              }
+            },
+            {
+              "name" = "sensitivevars"
+              "secret" = {
+                "defaultMode" = 420
+                "secretName" = "workspacesecrets"
+              }
+            },
+          ]
+        }
+      }
+    }
+  }
+}
