@@ -6,8 +6,6 @@ resource "kubernetes_manifest" "role_operator_terraform_sync_workspace" {
     "kind" = "Role"
     "metadata" = {
       "annotations" = {
-        "meta.helm.sh/release-name" = "operator"
-        "meta.helm.sh/release-namespace" = "demo"
       }
       "labels" = {
         "app" = "terraform"

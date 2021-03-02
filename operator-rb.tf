@@ -6,12 +6,9 @@ resource "kubernetes_manifest" "rolebinding_operator_terraform_sync_workspace" {
     "kind" = "RoleBinding"
     "metadata" = {
       "annotations" = {
-        "meta.helm.sh/release-name" = "operator"
-        "meta.helm.sh/release-namespace" = "demo"
       }
       "labels" = {
         "app" = "terraform"
-        "app.kubernetes.io/managed-by" = "Helm"
         "chart" = "terraform-helm"
         "heritage" = "Helm"
         "release" = "operator"
