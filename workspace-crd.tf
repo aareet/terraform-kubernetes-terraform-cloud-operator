@@ -3,20 +3,20 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
 
   manifest = {
     "apiVersion" = "apiextensions.k8s.io/v1beta1"
-    "kind" = "CustomResourceDefinition"
+    "kind"       = "CustomResourceDefinition"
     "metadata" = {
       "annotations" = {
         "controller-gen.kubebuilder.io/version" = "v0.3.0"
       }
       "creationTimestamp" = null
-      "name" = "workspaces.app.terraform.io"
+      "name"              = "workspaces.app.terraform.io"
     }
     "spec" = {
       "group" = "app.terraform.io"
       "names" = {
-        "kind" = "Workspace"
+        "kind"     = "Workspace"
         "listKind" = "WorkspaceList"
-        "plural" = "workspaces"
+        "plural"   = "workspaces"
         "singular" = "workspace"
       }
       "scope" = "Namespaced"
@@ -28,11 +28,11 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
           "properties" = {
             "apiVersion" = {
               "description" = "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
-              "type" = "string"
+              "type"        = "string"
             }
             "kind" = {
               "description" = "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
-              "type" = "string"
+              "type"        = "string"
             }
             "metadata" = {
               "type" = "object"
@@ -42,19 +42,19 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
               "properties" = {
                 "agentPoolID" = {
                   "description" = "Specifies the agent pool ID we wish to use."
-                  "type" = "string"
+                  "type"        = "string"
                 }
                 "module" = {
                   "description" = "Module source and version to use"
-                  "nullable" = true
+                  "nullable"    = true
                   "properties" = {
                     "source" = {
                       "description" = "Any remote module source (version control, registry)"
-                      "type" = "string"
+                      "type"        = "string"
                     }
                     "version" = {
                       "description" = "Module version for registry modules"
-                      "type" = "string"
+                      "type"        = "string"
                     }
                   }
                   "required" = [
@@ -64,7 +64,7 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                 }
                 "organization" = {
                   "description" = "Terraform Cloud organization"
-                  "type" = "string"
+                  "type"        = "string"
                 }
                 "outputs" = {
                   "description" = "Outputs denote outputs wanted"
@@ -73,11 +73,11 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                     "properties" = {
                       "key" = {
                         "description" = "Output name"
-                        "type" = "string"
+                        "type"        = "string"
                       }
                       "moduleOutputName" = {
                         "description" = "Attribute name in module"
-                        "type" = "string"
+                        "type"        = "string"
                       }
                     }
                     "type" = "object"
@@ -86,15 +86,15 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                 }
                 "secretsMountPath" = {
                   "description" = "File path within operator pod to load workspace secrets"
-                  "type" = "string"
+                  "type"        = "string"
                 }
                 "sshKeyID" = {
                   "description" = "SSH Key ID. This key must already exist in the TF Cloud organization.  This can either be the user assigned name of the SSH Key, or the system assigned ID."
-                  "type" = "string"
+                  "type"        = "string"
                 }
                 "terraformVersion" = {
                   "description" = "Terraform version used for this workspace. The default is `latest`."
-                  "type" = "string"
+                  "type"        = "string"
                 }
                 "variables" = {
                   "description" = "Variables as inputs to module"
@@ -103,23 +103,23 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                     "properties" = {
                       "environmentVariable" = {
                         "description" = "EnvironmentVariable denotes if this variable should be created as environment variable"
-                        "type" = "boolean"
+                        "type"        = "boolean"
                       }
                       "hcl" = {
                         "description" = "String input should be an HCL-formatted variable"
-                        "type" = "boolean"
+                        "type"        = "boolean"
                       }
                       "key" = {
                         "description" = "Variable name"
-                        "type" = "string"
+                        "type"        = "string"
                       }
                       "sensitive" = {
                         "description" = "Variable is a secret and should be retrieved from file"
-                        "type" = "boolean"
+                        "type"        = "boolean"
                       }
                       "value" = {
                         "description" = "Variable value"
-                        "type" = "string"
+                        "type"        = "string"
                       }
                       "valueFrom" = {
                         "description" = "Source for the variable's value. Cannot be used if value is not empty."
@@ -129,15 +129,15 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                             "properties" = {
                               "key" = {
                                 "description" = "The key to select."
-                                "type" = "string"
+                                "type"        = "string"
                               }
                               "name" = {
                                 "description" = "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?"
-                                "type" = "string"
+                                "type"        = "string"
                               }
                               "optional" = {
                                 "description" = "Specify whether the ConfigMap or its key must be defined"
-                                "type" = "boolean"
+                                "type"        = "boolean"
                               }
                             }
                             "required" = [
@@ -150,11 +150,11 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                             "properties" = {
                               "apiVersion" = {
                                 "description" = "Version of the schema the FieldPath is written in terms of, defaults to \"v1\"."
-                                "type" = "string"
+                                "type"        = "string"
                               }
                               "fieldPath" = {
                                 "description" = "Path of the field to select in the specified API version."
-                                "type" = "string"
+                                "type"        = "string"
                               }
                             }
                             "required" = [
@@ -167,7 +167,7 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                             "properties" = {
                               "containerName" = {
                                 "description" = "Container name: required for volumes, optional for env vars"
-                                "type" = "string"
+                                "type"        = "string"
                               }
                               "divisor" = {
                                 "anyOf" = [
@@ -178,13 +178,13 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                                     "type" = "string"
                                   },
                                 ]
-                                "description" = "Specifies the output format of the exposed resources, defaults to \"1\""
-                                "pattern" = "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$"
+                                "description"                = "Specifies the output format of the exposed resources, defaults to \"1\""
+                                "pattern"                    = "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$"
                                 "x-kubernetes-int-or-string" = true
                               }
                               "resource" = {
                                 "description" = "Required: resource to select"
-                                "type" = "string"
+                                "type"        = "string"
                               }
                             }
                             "required" = [
@@ -197,15 +197,15 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                             "properties" = {
                               "key" = {
                                 "description" = "The key of the secret to select from.  Must be a valid secret key."
-                                "type" = "string"
+                                "type"        = "string"
                               }
                               "name" = {
                                 "description" = "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?"
-                                "type" = "string"
+                                "type"        = "string"
                               }
                               "optional" = {
                                 "description" = "Specify whether the Secret or its key must be defined"
-                                "type" = "boolean"
+                                "type"        = "boolean"
                               }
                             }
                             "required" = [
@@ -228,23 +228,23 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
                 }
                 "vcs" = {
                   "description" = "Details of the VCS repository we want to connect to the workspace"
-                  "nullable" = true
+                  "nullable"    = true
                   "properties" = {
                     "branch" = {
                       "description" = "The repository branch to use"
-                      "type" = "string"
+                      "type"        = "string"
                     }
                     "ingress_submodules" = {
                       "description" = "Whether submodules should be fetched when cloning the VCS repository (Defaults to false)"
-                      "type" = "boolean"
+                      "type"        = "boolean"
                     }
                     "repo_identifier" = {
                       "description" = "A reference to your VCS repository in the format org/repo"
-                      "type" = "string"
+                      "type"        = "string"
                     }
                     "token_id" = {
                       "description" = "Token ID of the VCS Connection (OAuth Connection Token) to use https://www.terraform.io/docs/cloud/vcs"
-                      "type" = "string"
+                      "type"        = "string"
                     }
                   }
                   "required" = [
@@ -260,7 +260,7 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
               ]
               "type" = "object"
             }
-            
+
           }
           "type" = "object"
         }
@@ -268,8 +268,8 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
       "version" = "v1alpha1"
       "versions" = [
         {
-          "name" = "v1alpha1"
-          "served" = true
+          "name"    = "v1alpha1"
+          "served"  = true
           "storage" = true
         },
       ]

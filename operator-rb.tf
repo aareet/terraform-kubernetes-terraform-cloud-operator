@@ -3,19 +3,19 @@ resource "kubernetes_manifest" "rolebinding_operator_terraform_sync_workspace" {
 
   manifest = {
     "apiVersion" = "rbac.authorization.k8s.io/v1"
-    "kind" = "RoleBinding"
+    "kind"       = "RoleBinding"
     "metadata" = {
       "labels" = {
-        "app" = "terraform"
+        "app"     = "terraform"
         "release" = "operator"
       }
-      "name" = "operator-terraform-sync-workspace"
+      "name"      = "operator-terraform-sync-workspace"
       "namespace" = "demo"
     }
     "roleRef" = {
       "apiGroup" = "rbac.authorization.k8s.io"
-      "kind" = "Role"
-      "name" = "operator-terraform-sync-workspace"
+      "kind"     = "Role"
+      "name"     = "operator-terraform-sync-workspace"
     }
     "subjects" = [
       {

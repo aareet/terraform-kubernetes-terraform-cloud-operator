@@ -3,13 +3,13 @@ resource "kubernetes_manifest" "role_operator_terraform_sync_workspace" {
 
   manifest = {
     "apiVersion" = "rbac.authorization.k8s.io/v1"
-    "kind" = "Role"
+    "kind"       = "Role"
     "metadata" = {
       "labels" = {
-        "app" = "terraform"
+        "app"     = "terraform"
         "release" = "operator"
       }
-      "name" = "operator-terraform-sync-workspace"
+      "name"      = "operator-terraform-sync-workspace"
       "namespace" = "demo"
     }
     "rules" = [

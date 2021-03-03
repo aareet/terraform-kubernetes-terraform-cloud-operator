@@ -3,29 +3,29 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
 
   manifest = {
     "apiVersion" = "apps/v1"
-    "kind" = "Deployment"
+    "kind"       = "Deployment"
     "metadata" = {
       "labels" = {
-        "app" = "terraform"
+        "app"     = "terraform"
         "release" = "operator"
       }
-      "name" = "operator-terraform-sync-workspace"
+      "name"      = "operator-terraform-sync-workspace"
       "namespace" = "demo"
     }
     "spec" = {
       "progressDeadlineSeconds" = 600
-      "replicas" = 1
-      "revisionHistoryLimit" = 10
+      "replicas"                = 1
+      "revisionHistoryLimit"    = 10
       "selector" = {
         "matchLabels" = {
-          "app" = "terraform"
+          "app"       = "terraform"
           "component" = "sync-workspace"
-          "release" = "operator"
+          "release"   = "operator"
         }
       }
       "strategy" = {
         "rollingUpdate" = {
-          "maxSurge" = "25%"
+          "maxSurge"       = "25%"
           "maxUnavailable" = "25%"
         }
         "type" = "RollingUpdate"
@@ -33,9 +33,9 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
       "template" = {
         "metadata" = {
           "labels" = {
-            "app" = "terraform"
+            "app"       = "terraform"
             "component" = "sync-workspace"
-            "release" = "operator"
+            "release"   = "operator"
           }
         }
         "spec" = {
@@ -54,75 +54,75 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
                   "valueFrom" = {
                     "fieldRef" = {
                       "apiVersion" = "v1"
-                      "fieldPath" = "metadata.name"
+                      "fieldPath"  = "metadata.name"
                     }
                   }
                 },
                 {
-                  "name" = "OPERATOR_NAME"
+                  "name"  = "OPERATOR_NAME"
                   "value" = "terraform-k8s"
                 },
                 {
-                  "name" = "TF_VERSION"
+                  "name"  = "TF_VERSION"
                   "value" = "latest"
                 },
                 {
-                  "name" = "TF_CLI_CONFIG_FILE"
+                  "name"  = "TF_CLI_CONFIG_FILE"
                   "value" = "/etc/terraform/.terraformrc"
                 },
                 {
                   "name" = "TF_URL"
                 },
               ]
-              "image" = "hashicorp/terraform-k8s:1.0.0"
+              "image"           = "hashicorp/terraform-k8s:1.0.0"
               "imagePullPolicy" = "IfNotPresent"
               "livenessProbe" = {
                 "failureThreshold" = 3
                 "httpGet" = {
-                  "path" = "/metrics"
-                  "port" = 8383
+                  "path"   = "/metrics"
+                  "port"   = 8383
                   "scheme" = "HTTP"
                 }
                 "initialDelaySeconds" = 30
-                "periodSeconds" = 5
-                "successThreshold" = 1
-                "timeoutSeconds" = 5
+                "periodSeconds"       = 5
+                "successThreshold"    = 1
+                "timeoutSeconds"      = 5
               }
               "name" = "terraform-sync-workspace"
               "readinessProbe" = {
                 "failureThreshold" = 5
                 "httpGet" = {
-                  "path" = "/metrics"
-                  "port" = 8383
+                  "path"   = "/metrics"
+                  "port"   = 8383
                   "scheme" = "HTTP"
                 }
                 "initialDelaySeconds" = 10
-                "periodSeconds" = 5
-                "successThreshold" = 1
-                "timeoutSeconds" = 5
+                "periodSeconds"       = 5
+                "successThreshold"    = 1
+                "timeoutSeconds"      = 5
               }
-              "resources" = {}
-              "terminationMessagePath" = "/dev/termination-log"
+              "resources"                = {}
+              "terminationMessagePath"   = "/dev/termination-log"
               "terminationMessagePolicy" = "File"
               "volumeMounts" = [
                 {
                   "mountPath" = "/etc/terraform"
-                  "name" = "terraformrc"
-                  "readOnly" = true
+                  "name"      = "terraformrc"
+                  "readOnly"  = true
                 },
                 {
                   "mountPath" = "/tmp/secrets"
-                  "name" = "sensitivevars"
-                  "readOnly" = true
+                  "name"      = "sensitivevars"
+                  "readOnly"  = true
                 },
               ]
             },
           ]
-          "dnsPolicy" = "ClusterFirst"
-          "restartPolicy" = "Always"
-          "schedulerName" = "default-scheduler"
-          "serviceAccount" = "operator-terraform-sync-workspace"
-          "serviceAccountName" = "operator-terraform-sync-workspace"
+          "dnsPolicy"                     = "ClusterFirst"
+          "restartPolicy"                 = "Always"
+          "schedulerName"                 = "default-scheduler"
+          "serviceAccount"                = "operator-terraform-sync-workspace"
+          "serviceAccountName"            = "operator-terraform-sync-workspace"
           "terminationGracePeriodSeconds" = 30
           "volumes" = [
             {
@@ -130,7 +130,7 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
               "secret" = {
                 "items" = [
                   {
-                    "key" = "credentials"
+                    "key"  = "credentials"
                     "path" = ".terraformrc"
                   },
                 ]
