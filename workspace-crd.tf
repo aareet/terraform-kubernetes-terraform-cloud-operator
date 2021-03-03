@@ -21,6 +21,7 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
       }
       "scope" = "Namespaced"
       "subresources" = {
+        "status" = {}
       }
       "validation" = {
         "openAPIV3Schema" = {
@@ -319,6 +320,5 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
         },
       ]
     }
-
   }
 }
