@@ -4,6 +4,7 @@ It requires you to specify the namespace and assumes that the namespace exists a
 
 An example configuration to use this module could be:
 ```
+# main.tf
 module "terraform-cloud-operator" {
   source  = "aareet/terraform-cloud-operator/kubernetes"
   version = "0.0.1"
