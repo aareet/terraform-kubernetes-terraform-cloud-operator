@@ -260,7 +260,52 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
               ]
               "type" = "object"
             }
-
+            "status" = {
+              "description" = "WorkspaceStatus defines the observed state of Workspace"
+              "properties" = {
+                "configVersionID" = {
+                  "description" = "Configuration Version ID"
+                  "type"        = "string"
+                }
+                "outputs" = {
+                  "description" = "Outputs from state file"
+                  "items" = {
+                    "description" = "OutputStatus outputs the values of Terraform output"
+                    "properties" = {
+                      "key" = {
+                        "description" = "Attribute name in module"
+                        "type"        = "string"
+                      }
+                      "value" = {
+                        "description" = "Value"
+                        "type"        = "string"
+                      }
+                    }
+                    "type" = "object"
+                  }
+                  "type" = "array"
+                }
+                "runID" = {
+                  "description" = "Run ID"
+                  "type"        = "string"
+                }
+                "runStatus" = {
+                  "description" = "Run Status gets the run status"
+                  "type"        = "string"
+                }
+                "workspaceID" = {
+                  "description" = "Workspace ID"
+                  "type"        = "string"
+                }
+              }
+              "required" = [
+                "configVersionID",
+                "runID",
+                "runStatus",
+                "workspaceID",
+              ]
+              "type" = "object"
+            }
           }
           "type" = "object"
         }
@@ -274,5 +319,6 @@ resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terrafor
         },
       ]
     }
+
   }
 }
