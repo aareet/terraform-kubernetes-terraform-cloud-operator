@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
         "release" = "operator"
       }
       "name"      = "operator-terraform-sync-workspace"
-      "namespace" = "demo"
+      "namespace" = var.operator_namespace
     }
     "spec" = {
       "progressDeadlineSeconds" = 600
@@ -43,7 +43,7 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
             {
               "args" = [
                 "--enable-leader-election",
-                "--k8s-watch-namespace=demo",
+                "--k8s-watch-namespace=${var.operator_namespace}",
               ]
               "command" = [
                 "/bin/terraform-k8s",

@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "role_operator_terraform_sync_workspace" {
         "release" = "operator"
       }
       "name"      = "operator-terraform-sync-workspace"
-      "namespace" = "demo"
+      "namespace" = var.operator_namespace
     }
     "rules" = [
       {
