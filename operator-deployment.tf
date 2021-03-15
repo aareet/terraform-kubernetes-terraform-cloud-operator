@@ -1,5 +1,6 @@
 resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
   provider = kubernetes-alpha
+  depends_on = [kubernetes_secret.terraformrc, kubernetes_secret.workspacesecrets]
 
   manifest = {
     "apiVersion" = "apps/v1"
