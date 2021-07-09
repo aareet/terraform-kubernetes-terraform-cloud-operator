@@ -44,7 +44,7 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
             {
               "args" = [
                 "--enable-leader-election",
-                "--k8s-watch-namespace=${var.operator_namespace}",
+                "--k8s-watch-namespace=${var.k8WatchNamespace == "null" ? var.operator_namespace : var.k8WatchNamespace}"
               ]
               "command" = [
                 "/bin/terraform-k8s",

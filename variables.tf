@@ -25,3 +25,11 @@ variable "create_secrets" {
   description = "By default, module will create two secrets named terraformrc and workspacesecrets."
   default     = true
 }
+
+variable "k8WatchNamespace" {
+  type    = string
+  default = "null"
+}
+
+
+
