@@ -4,7 +4,7 @@ variable "operator_namespace" {
 }
 
 variable "terraform_credentials_path" {
-  type = string
+  type        = string
   description = "Specify the path to the file that contains your Terraform Cloud Team API token"
 }
 
@@ -16,7 +16,7 @@ variable "workspacesecrets" {
 }
 
 variable "create_namespace" {
-  type = bool
+  type    = bool
   default = true
 }
 
