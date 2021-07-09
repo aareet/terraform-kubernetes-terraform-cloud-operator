@@ -1,11 +1,9 @@
-resource "kubernetes_manifest" "namespace_operator" {
-  provider = kubernetes-alpha
+resource "kubernetes_namespace" "namespace_operator" {
+  count = var.create_namespace ? 1 : 0
 
-  manifest = {
-    "apiVersion" = "v1"
-    "kind"       = "Namespace"
-    "metadata" = {
-      "name" = var.operator_namespace
-    }
+  metadata {
+    name = var.operator_namespace
   }
 }
+
+

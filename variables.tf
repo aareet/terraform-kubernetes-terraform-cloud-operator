@@ -13,3 +13,8 @@ variable "workspacesecrets" {
   description = "Specify any secrets you want added to your Terraform Cloud workspace"
   default = "value"
 }
+
+variable "create_namespace" {
+  type = bool
+  default = true
+}

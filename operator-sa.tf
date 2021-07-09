@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "serviceaccount_operator_terraform_sync_workspace
         "release" = "operator"
       }
       "name"      = "operator-terraform-sync-workspace"
-      "namespace" = kubernetes_manifest.namespace_operator.object.metadata.name 
+      "namespace" = var.operator_namespace
     }
   }
 }
