@@ -9,12 +9,19 @@ variable "terraform_credentials_path" {
 }
 
 variable "workspacesecrets" {
-  type = string
-  description = "Specify any secrets you want added to your Terraform Cloud workspace"
-  default = "value"
+  type        = map(string)
+  description = "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret#data"
+  default = {
+  }
 }
 
 variable "create_namespace" {
   type = bool
   default = true
+}
+
+variable "create_secrets" {
+  type        = bool
+  description = "By default, module will create two secrets named terraformrc and workspacesecrets."
+  default     = true
 }

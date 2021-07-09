@@ -1,4 +1,6 @@
 resource "kubernetes_secret" "terraformrc" {
+  count = var.create_secrets ? 1 : 0
+
   metadata {
     name = "terraformrc"
     namespace = var.operator_namespace
@@ -11,13 +13,13 @@ resource "kubernetes_secret" "terraformrc" {
 }
 
 resource "kubernetes_secret" "workspacesecrets" {
+  count = var.create_secrets ? 1 : 0
+
   metadata {
     name = "workspacesecrets"
     namespace = var.operator_namespace
   }
 
-  data = {
-    key = var.workspacesecrets
-  }
+  data = var.workspacesecrets
 
 }
