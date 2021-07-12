@@ -77,9 +77,10 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
                 },
                 {
                   "name" = "TF_URL"
+ 		  "value" = var.tfeAddress
                 },
               ]
-              "image"           = "hashicorp/terraform-k8s:1.0.0"
+              "image"           = var.imageK8S
               "imagePullPolicy" = "IfNotPresent"
               "livenessProbe" = {
                 "failureThreshold" = 3

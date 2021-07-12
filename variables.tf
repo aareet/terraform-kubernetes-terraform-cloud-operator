@@ -41,3 +41,13 @@ variable "insecure" {
   type = bool
   default = false
 }
+
+variable "tfeAddress" {
+  type = string
+  default = "https://app.terraform.io"
+}
+
+variable "imageK8S" {
+  type = string
+  default = "hashicorp/terraform-k8s:1.0.0"
+}
