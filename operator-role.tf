@@ -1,5 +1,5 @@
 resource "kubernetes_manifest" "role_operator_terraform_sync_workspace" {
-  provider = kubernetes-alpha
+  provider   = kubernetes-alpha
   depends_on = [kubernetes_manifest.deployment_operator_terraform_sync_workspace]
 
   manifest = {

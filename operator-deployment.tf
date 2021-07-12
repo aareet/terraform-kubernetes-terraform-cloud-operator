@@ -76,8 +76,8 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
                   "value" = "/etc/terraform/.terraformrc"
                 },
                 {
-                  "name" = "TF_URL"
- 		  "value" = var.tfeAddress
+                  "name"  = "TF_URL"
+                  "value" = var.tfeAddress
                 },
               ]
               "image"           = var.imageK8S
