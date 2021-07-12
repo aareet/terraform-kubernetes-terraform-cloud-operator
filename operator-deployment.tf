@@ -65,7 +65,11 @@ resource "kubernetes_manifest" "deployment_operator_terraform_sync_workspace" {
                 },
                 {
                   "name"  = "TF_VERSION"
-                  "value" = "latest"
+                  "value" = var.terraformVersion
+                },
+                {
+                  "name"  = "TF_INSECURE"
+                  "value" = var.insecure
                 },
                 {
                   "name"  = "TF_CLI_CONFIG_FILE"

@@ -31,5 +31,13 @@ variable "k8WatchNamespace" {
   default = "null"
 }
 
+variable "terraformVersion" {
+  type        = string
+  description = "https://github.com/hashicorp/terraform-helm/blob/master/values.yaml#L41"
+  default     = "latest"
+}
 
-
+variable "insecure" {
+  type = bool
+  default = false
+}
