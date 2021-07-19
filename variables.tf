@@ -6,9 +6,10 @@ variable "operator_namespace" {
 variable "terraform_credentials_path" {
   type        = string
   description = "Specify the path to the file that contains your Terraform Cloud Team API token"
+  default     = "credentials"
 }
 
-variable "workspacesecrets" {
+variable "workspace_secrets" {
   type        = map(string)
   description = "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret#data"
   default = {
@@ -26,12 +27,12 @@ variable "create_secrets" {
   default     = true
 }
 
-variable "k8WatchNamespace" {
+variable "k8_watch_namespace" {
   type    = string
   default = "null"
 }
 
-variable "terraformVersion" {
+variable "terraform_version" {
   type        = string
   description = "https://github.com/hashicorp/terraform-helm/blob/master/values.yaml#L41"
   default     = "latest"
@@ -42,12 +43,13 @@ variable "insecure" {
   default = false
 }
 
-variable "tfeAddress" {
+variable "tfe_address" {
   type    = string
   default = "https://app.terraform.io"
 }
 
-variable "imageK8S" {
+variable "image_k8s" {
   type    = string
   default = "hashicorp/terraform-k8s:1.0.0"
 }
+
