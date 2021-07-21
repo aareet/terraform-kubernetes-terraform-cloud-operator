@@ -1,7 +1,7 @@
 # terraform-kubernetes-terraform-cloud-operator
-This module uses the 0.3.0+ version of the kubernetes-alpha provider to install the Terraform Cloud Operator for Kubernetes.
+This module uses the kubernetes provider, and the 0.3.0+ version of the kubernetes-alpha provider to install the Terraform Cloud Operator for Kubernetes.
 
-By default it creates a namespace and two secrets named terraformrc and workspacesecrets. The operator
+By default, it creates a namespace and two secrets named terraformrc and workspacesecrets. The operator
 is installed in that provided namespace.
 
 An example configuration to use this module could be:
@@ -21,8 +21,8 @@ module "terraform-cloud-operator" {
 
   operator_namespace = "demo"
   workspace_secrets = {
-    "AWS_ACCESS_KEY_ID"     = var.aws_access_key_id
-    "AWS_SECRET_ACCESS_KEY" = var.aws.secret_access_key
+    AWS_ACCESS_KEY_ID     = var.aws_access_key_id
+    AWS_SECRET_ACCESS_KEY = var.aws.secret_access_key
   }
 }
 ```
@@ -61,6 +61,7 @@ No modules.
 
 ## Inputs
 
+
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | By default, the module will create a namespace in which to install the operator. | `bool` | `true` | no |
@@ -68,6 +69,7 @@ No modules.
 | <a name="input_image_k8s"></a> [image\_k8s](#input\_image\_k8s) | image\_k8s is the name (and tag) of the terraform-k8s Docker image that is used for functionality such as workspace sync. This can be overridden per component. | `string` | `"hashicorp/terraform-k8s:1.0.0"` | no |
 | <a name="input_insecure"></a> [insecure](#input\_insecure) | If true it disables certificate validation for all outbound HTTPS connection the operator has to do. It can be used when connecting to TFE instances with self-signed certificates. | `bool` | `false` | no |
 | <a name="input_k8_watch_namespace"></a> [k8\_watch\_namespace](#input\_k8\_watch\_namespace) | k8\_watch\_namespace is the Kubernetes namespace to watch for workspace changes and sync to Terraform Cloud. If this is not set then it will default to the release namespace. | `string` | `"null"` | no |
+| <a name="input_log_level"></a> [log\_level](#input\_log\_level) | WARNING: use only on terraform-k8s versions > 1.0.0. Configure zap optional flag to adjust log level verbosity. Can be one of 'debug', 'info', 'error'. Defaults to 'debug'. | `string` | `"null"` | no |
 | <a name="input_operator_namespace"></a> [operator\_namespace](#input\_operator\_namespace) | The namespace in which to install the operator and monitor for Workspaces. | `string` | n/a | yes |
 | <a name="input_terraform_credentials_path"></a> [terraform\_credentials\_path](#input\_terraform\_credentials\_path) | Specify the relative path to the file that contains your Terraform Cloud Team API token. | `string` | `"credentials"` | no |
 | <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version) | terraformVersion describes the version of Terraform to use for each workspace. If this is not set then it will default to the latest version of Terraform compiled with the operator. | `string` | `"latest"` | no |

@@ -56,3 +56,9 @@ variable "image_k8s" {
   description = "image_k8s is the name (and tag) of the terraform-k8s Docker image that is used for functionality such as workspace sync. This can be overridden per component."
   default     = "hashicorp/terraform-k8s:1.0.0"
 }
+
+variable "log_level" {
+  type        = string
+  description = "WARNING: use only on terraform-k8s versions > 1.0.0. Configure zap optional flag to adjust log level verbosity. Can be one of 'debug', 'info', 'error'. Defaults to 'debug'."
+  default     = "null"
+}

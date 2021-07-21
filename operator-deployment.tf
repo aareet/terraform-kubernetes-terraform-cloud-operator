@@ -35,13 +35,13 @@ resource "kubernetes_deployment" "operator_terraform_sync_workspace" {
           component = "sync-workspace"
           release   = "operator"
         }
-        name = "kunal"
       }
       spec {
         container {
           args = [
             "--enable-leader-election",
-          "--k8s-watch-namespace=${var.k8_watch_namespace == "null" ? var.operator_namespace : var.k8_watch_namespace}"]
+            "--k8s-watch-namespace=${var.k8_watch_namespace == "null" ? var.operator_namespace : var.k8_watch_namespace}",
+          "${var.log_level == "null" ? "" : "--zap-log-level=${var.log_level}"}"]
           command = ["/bin/terraform-k8s"]
           env {
             name = "POD_NAME"
