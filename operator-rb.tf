@@ -1,4 +1,7 @@
-resource "kubernetes_role_binding" "rolebinding_operator_terraform_sync_workspace" {
+// Use either RoleBinding or ClusterRoleBinding RBAC depending on watch namespace
+resource "kubernetes_role_binding" "operator_terraform_sync_workspace" {
+  count = var.k8_watch_namespace == "null" ? 1 : 0
+
   metadata {
     name      = "operator-terraform-sync-workspace"
     namespace = var.operator_namespace
@@ -10,6 +13,28 @@ resource "kubernetes_role_binding" "rolebinding_operator_terraform_sync_workspac
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
+    name      = "operator-terraform-sync-workspace"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "operator-terraform-sync-workspace"
+    namespace = var.operator_namespace
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "operator_terraform_sync_workspace" {
+  count = var.k8_watch_namespace == "null" ? 0 : 1
+
+  metadata {
+    name = "operator-terraform-sync-workspace"
+    labels = {
+      app     = "terraform"
+      release = "operator"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
     name      = "operator-terraform-sync-workspace"
   }
   subject {

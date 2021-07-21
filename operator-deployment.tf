@@ -1,4 +1,4 @@
-resource "kubernetes_deployment" "deployment_operator_terraform_sync_workspace" {
+resource "kubernetes_deployment" "operator_terraform_sync_workspace" {
   depends_on = [kubernetes_secret.terraformrc, kubernetes_secret.workspacesecrets]
 
   metadata {
@@ -35,6 +35,7 @@ resource "kubernetes_deployment" "deployment_operator_terraform_sync_workspace" 
           component = "sync-workspace"
           release   = "operator"
         }
+        name = "kunal"
       }
       spec {
         container {
