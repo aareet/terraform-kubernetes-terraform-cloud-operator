@@ -1,3 +1,32 @@
+# terraform-kubernetes-terraform-cloud-operator
+This module uses the 0.3.0+ version of the kubernetes-alpha provider to install the Terraform Cloud Operator for Kubernetes.
+
+By default it creates a namespace and two secrets named terraformrc and workspacesecrets. The operator
+is installed in that provided namespace.
+
+An example configuration to use this module could be:
+```
+# main.tf
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
+provider "kubernetes-alpha" {
+  config_path = "~/.kube/config"
+}
+
+module "terraform-cloud-operator" {
+  source  = "kunalvalia/terraform-cloud-operator/kubernetes"
+  version = "0.0.1"
+
+  operator_namespace = "demo"
+  workspace_secrets = {
+    "AWS_ACCESS_KEY_ID"     = var.aws_access_key_id
+    "AWS_SECRET_ACCESS_KEY" = var.aws.secret_access_key
+  }
+}
+```
+
 ## Requirements
 
 | Name | Version |
