@@ -1,6 +1,6 @@
 // Use either Role or ClusterRole RBAC depending on watch namespace
 resource "kubernetes_role" "operator_terraform_sync_workspace" {
-  count = var.k8_watch_namespace == "null" ? 1 : 0
+  count = var.k8_watch_namespace == "null" || var.k8_watch_namespace == var.operator_namespace ? 1 : 0
 
   metadata {
     name      = "operator-terraform-sync-workspace"
@@ -55,7 +55,7 @@ resource "kubernetes_role" "operator_terraform_sync_workspace" {
 }
 
 resource "kubernetes_cluster_role" "operator_terraform_sync_workspace" {
-  count = var.k8_watch_namespace == "null" ? 0 : 1
+  count = var.k8_watch_namespace == "null" || var.k8_watch_namespace == var.operator_namespace ? 0 : 1
 
   metadata {
     name = "operator-terraform-sync-workspace"
