@@ -29,9 +29,12 @@ module "terraform-cloud-operator" {
 
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_kubernetes-alpha"></a> [kubernetes-alpha](#requirement\_kubernetes-alpha) | >= 0.3.0 |
+A local file named credentials, formatted as such.
+```
+credentials app.terraform.io {
+  token = "TERRAFORM_CLOUD_API_TOKEN"
+}
+```
 
 ## Providers
 
