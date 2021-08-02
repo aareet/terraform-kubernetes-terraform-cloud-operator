@@ -14,7 +14,6 @@ provider "kubernetes" {
   }
 }
 
-
 module "terraform-cloud-operator" {
   source  = "kunalvalia/terraform-cloud-operator/kubernetes"
   version = "0.0.1"
@@ -47,10 +46,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [kubernetes-alpha_kubernetes_manifest.customresourcedefinition_workspaces_app_terraform_io](https://registry.terraform.io/providers/hashicorp/kubernetes-alpha/latest/docs/resources/kubernetes_manifest) | resource |
 | [kubernetes_cluster_role.operator_terraform_sync_workspace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role_binding.operator_terraform_sync_workspace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_deployment.operator_terraform_sync_workspace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/deployment) | resource |
+| [kubernetes_manifest.customresourcedefinition_workspaces_app_terraform_io](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_namespace.namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_role.operator_terraform_sync_workspace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
 | [kubernetes_role_binding.operator_terraform_sync_workspace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding) | resource |
