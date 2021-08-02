@@ -1,6 +1,4 @@
 resource "kubernetes_manifest" "customresourcedefinition_workspaces_app_terraform_io" {
-  provider = kubernetes-alpha
-
   manifest = {
     "apiVersion" = "apiextensions.k8s.io/v1beta1"
     "kind"       = "CustomResourceDefinition"

@@ -9,11 +9,11 @@ An example configuration to use this module could be:
 # main.tf
 provider "kubernetes" {
   config_path = "~/.kube/config"
+  experiments = {
+    manifest_resource = true
+  }
 }
 
-provider "kubernetes-alpha" {
-  config_path = "~/.kube/config"
-}
 
 module "terraform-cloud-operator" {
   source  = "kunalvalia/terraform-cloud-operator/kubernetes"
@@ -29,19 +29,15 @@ module "terraform-cloud-operator" {
 
 ## Requirements
 
-A local file named credentials, formatted as such.
-```
-credentials app.terraform.io {
-  token = "TERRAFORM_CLOUD_API_TOKEN"
-}
-```
+| Name | Version |
+|------|---------|
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
-| <a name="provider_kubernetes-alpha"></a> [kubernetes-alpha](#provider\_kubernetes-alpha) | >= 0.3.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.4.0 |
 
 ## Modules
 
