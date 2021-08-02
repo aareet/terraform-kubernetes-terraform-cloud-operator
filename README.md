@@ -1,5 +1,5 @@
 # terraform-kubernetes-terraform-cloud-operator
-This module uses the kubernetes provider, and the 0.3.0+ version of the kubernetes-alpha provider to install the Terraform Cloud Operator for Kubernetes.
+This module uses the kubernetes provider and beta kubernetes manifest resource to install the Terraform Cloud Operator for Kubernetes.
 
 By default, it creates a namespace and two secrets named terraformrc and workspacesecrets. The operator
 is installed in that provided namespace.
@@ -15,7 +15,7 @@ provider "kubernetes" {
 }
 
 module "terraform-cloud-operator" {
-  source  = "kunalvalia/terraform-cloud-operator/kubernetes"
+  source  = "hashicorp/terraform-cloud-operator/kubernetes"
   version = "0.0.1"
 
   operator_namespace = "demo"
