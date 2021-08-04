@@ -1,21 +1,25 @@
 resource "kubernetes_secret" "terraformrc" {
+  count = var.create_secrets ? 1 : 0
+
   metadata {
-    name = "terraformrc"
-    namespace = kubernetes_manifest.namespace_operator.object.metadata.name
+    name      = "terraformrc"
+    namespace = var.operator_namespace
   }
 
   data = {
-    "credentials" = "${file("${var.terraform_credentials_path}")}"
+    "credentials" = file("${path.cwd}/${var.terraform_credentials_path}")
   }
+
 }
 
 resource "kubernetes_secret" "workspacesecrets" {
+  count = var.create_secrets ? 1 : 0
+
   metadata {
-    name = "workspacesecrets"
-    namespace = kubernetes_manifest.namespace_operator.object.metadata.name
+    name      = "workspacesecrets"
+    namespace = var.operator_namespace
   }
 
-  data = {
-    key = var.workspacesecrets
-  }
+  data = var.workspace_secrets
+
 }

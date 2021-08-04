@@ -1,16 +1,10 @@
-resource "kubernetes_manifest" "serviceaccount_operator_terraform_sync_workspace" {
-  provider = kubernetes-alpha
-
-  manifest = {
-    "apiVersion" = "v1"
-    "kind"       = "ServiceAccount"
-    "metadata" = {
-      "labels" = {
-        "app"     = "terraform"
-        "release" = "operator"
-      }
-      "name"      = "operator-terraform-sync-workspace"
-      "namespace" = kubernetes_manifest.namespace_operator.object.metadata.name 
+resource "kubernetes_service_account" "operator_terraform_sync_workspace" {
+  metadata {
+    name      = "operator-terraform-sync-workspace"
+    namespace = var.operator_namespace
+    labels = {
+      app     = "terraform"
+      release = "operator"
     }
   }
 }
