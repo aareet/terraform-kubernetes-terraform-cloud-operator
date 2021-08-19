@@ -1,3 +1,5 @@
+> ⚠️ HashiCorp has taken over maintenance of this module so this version is no longer maintained - the official module is available here: https://registry.terraform.io/modules/hashicorp/terraform-cloud-operator/kubernetes/latest
+
 # terraform-kubernetes-terraform-cloud-operator
 This module uses the kubernetes provider and beta kubernetes manifest resource to install the Terraform Cloud Operator for Kubernetes.
 
